@@ -1,7 +1,7 @@
 
 add_rules("mode.debug", "mode.release")
 
-target("WaveDisplaySystem")
+target("ECGDisplaySystem")
     add_rules("qt.widgetapp")
     add_headerfiles("src/*.h")
     add_files("src/*.cpp")
@@ -12,7 +12,6 @@ target("WaveDisplaySystem")
     add_files("src/mainwindow.h")
     add_files("src/monitorwindow.h")
     add_files("src/settingwindow.h")
-    add_files("src/scatterwindow.h")
 
     add_files("res.qrc")
 
