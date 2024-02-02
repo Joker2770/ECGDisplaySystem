@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HomeWindow</class>
+ <widget class="QWidget" name="HomeWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>916</width>
+    <height>690</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="home_data_control_gb">
+       <property name="title">
+        <string>Data Control</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QTextBrowser" name="textBrowser"/>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QRadioButton" name="home_data_out_rbtn">
+              <property name="styleSheet">
+               <string notr="true">QRadioButton{
+spacing: 2px;
+color: blue;
+}
+QRadioButton::indicator {
+width: 45px;
+height: 30px;
+}
+QRadioButton::indicator:unchecked {
+image: url(:/icons/switch_off.png);
+}
+QRadioButton::indicator:checked {
+image: url(:/icons/switch_on.png);
+}</string>
+              </property>
+              <property name="text">
+               <string>out</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="home_datetime_rbtn">
+              <property name="styleSheet">
+               <string notr="true">QRadioButton{
+spacing: 2px;
+color: blue;
+}
+QRadioButton::indicator {
+width: 45px;
+height: 30px;
+}
+QRadioButton::indicator:unchecked {
+image: url(:/icons/switch_off.png);
+}
+QRadioButton::indicator:checked {
+image: url(:/icons/switch_on.png);
+}</string>
+              </property>
+              <property name="text">
+               <string>time suffix</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="home_autosave_cb">
+              <property name="text">
+               <string>autosave</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="home_clear_btn">
+              <property name="text">
+               <string>clear</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="home_save_btn">
+              <property name="text">
+               <string>save</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

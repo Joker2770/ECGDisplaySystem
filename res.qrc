@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/control.png</file>
+        <file>icons/dashboard.png</file>
+        <file>icons/home.png</file>
+        <file>icons/setting.png</file>
+        <file>icons/switch_off.png</file>
+        <file>icons/switch_on.png</file>
+        <file>icons/ChartScatter.png</file>
+        <file>icons/WaveLine.png</file>
+        <file>i18n/ECGDisplaySystem_zh_CN.qm</file>
+        <file>icons/icon.ico</file>
+    </qresource>
+</RCC>

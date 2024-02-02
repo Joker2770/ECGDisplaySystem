@@ -1,0 +1,8 @@
+/mnt/d/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/WaveDisplaySystem.dir
+/mnt/d/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/edit_cache.dir
+/mnt/d/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/rebuild_cache.dir
+/mnt/d/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/list_install_components.dir
+/mnt/d/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/install.dir
+/mnt/d/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/install/local.dir
+/mnt/d/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/install/strip.dir
+/mnt/d/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/WaveDisplaySystem_autogen.dir
