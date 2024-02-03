@@ -2,6 +2,7 @@
 #include "ui_monitorwindow.h"
 #include "global.h"
 
+#include <QDateTime>
 #include <QChartView>
 #include <QLineSeries>
 #include <QDebug>
@@ -10,6 +11,8 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
                                                 ui(new Ui::MonitorWindow)
 {
     ui->setupUi(this);
+
+    this->setWindowModality(Qt::NonModal);
 
     this->m_splineSeries = new QSplineSeries();
     this->m_axisX = new QValueAxis();
@@ -20,9 +23,7 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
     this->m_timer = new QTimer();
     this->m_timer->setTimerType(Qt::PreciseTimer);
 
-    this->m_axisX->setMin(0);
-    this->m_axisX->setMax(MAX_QUEUE_SIZE);
-    this->m_axisX->setRange(0, MAX_QUEUE_SIZE);
+    this->m_axisX->setRange(QDateTime::currentDateTime().toMSecsSinceEpoch(), QDateTime::currentDateTime().addSecs(MAX_QUEUE_SIZE - 1).toMSecsSinceEpoch());
     this->m_axisX->setTitleText(tr("position"));
 
     this->m_axisY->setRange(0, 4096);
@@ -36,10 +37,6 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
     /* after addSeries*/
     this->m_splineSeries->attachAxis(this->m_axisX);
     this->m_splineSeries->attachAxis(this->m_axisY);
-    for (int i = 0; i < MAX_QUEUE_SIZE; ++i)
-    {
-        this->m_splineSeries->append(i, i);
-    }
 
     ui->graphicsView->setChart(this->m_chart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
@@ -84,10 +81,12 @@ void MonitorWindow::OnTimerTimeOut()
 {
     if (this->ui->radioButton->isChecked())
     {
-        this->m_splineSeries->clear();
-
-        for (size_t i = 0; i < gVecDataQueue.size(); ++i) {
-            this->m_splineSeries->append(i, gVecDataQueue.at(i));
+        if (this->m_splineSeries->count() >= MAX_QUEUE_SIZE) {
+            this->m_splineSeries->removePoints(0, 1);
         }
+        qint64 timestamp = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        this->m_splineSeries->append(timestamp, g_data_unit.load(std::memory_order_relaxed));
+        this->m_axisX->setRange(this->m_splineSeries->at(0).x()
+                                , this->m_splineSeries->at(this->m_splineSeries->count() - 1).x());
     }
 }

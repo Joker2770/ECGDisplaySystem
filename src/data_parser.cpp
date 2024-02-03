@@ -6,199 +6,88 @@
  ************************************************************************/
 
 #include "data_parser.h"
-#include "crc16_modbus.h"
+
+#include "global.h"
 
 #include <QDebug>
 
-vector<uint16_t> g_VecWaveSeries;
-vector<pair<uint16_t, uint16_t>> g_vecVertexSeries;
-
 DataParser::DataParser()
 {
-    this->m_qbaWave.clear();
-    this->m_qbaWaveSeries.clear();
-    this->m_qbaVertex.clear();
-    this->m_qbaVertexSeries.clear();
+    this->m_qbaECG.clear();
+    this->m_qbaECGSeries.clear();
     this->m_vPlotSeries.clear();
-
-    this->m_bHandleWave = false;
 }
 
 DataParser::~DataParser()
 {
 }
 
-void DataParser::waveDataJoint(const QByteArray &data)
+void DataParser::ECGDataJoint(const QByteArray &data)
 {
     if (!(data.isEmpty()))
     {
-        if (this->m_qbaWave.isEmpty())
-        {
-            int pos = data.indexOf("\xcf\xfc");
-            while (-1 != pos)
+            if (this->m_qbaECG.isEmpty())
             {
-                this->m_bHandleWave = true;
-                this->m_qbaWave.append(data.mid(pos, WAVE_PACK_LEN - this->m_qbaWave.length()));
-                if (WAVE_PACK_LEN == this->m_qbaWave.length())
-                {
-                    this->getPlotSeries(this->m_qbaWave);
-                    this->m_qbaWave.clear();
-                    this->m_qbaWaveSeries.clear();
-                    this->m_bHandleWave = false;
-                }
-                else
-                {
-                    // do nothiing
-                }
-                pos = data.indexOf("\xcf\xfc", pos + WAVE_PACK_LEN);
-            }
-        }
-        else
-        {
-            if (this->m_bHandleWave)
-            {
-                this->m_qbaWave.append(data.mid(0, WAVE_PACK_LEN - this->m_qbaWave.length()));
-                if (WAVE_PACK_LEN == this->m_qbaWave.length())
-                {
-                    this->getPlotSeries(this->m_qbaWave);
-                    this->m_qbaWave.clear();
-                    this->m_qbaWaveSeries.clear();
-                    this->m_bHandleWave = false;
-                }
-                else
-                {
-                    // do nothiing
-                }
-            }
-            else
-            {
-                this->m_qbaWave.clear();
-            }
-        }
-    }
-    else
-    {
-        this->m_qbaWave.clear();
-        this->m_qbaWaveSeries.clear();
-        g_VecWaveSeries.clear();
-    }
-}
-
-void DataParser::vertexDataJoint(const QByteArray &data)
-{
-    if (!(data.isEmpty()))
-    {
-        int pos = data.indexOf("\xcf\xfc");
-        if (!(this->m_bHandleWave) && -1 == pos)
-        {
-            if (this->m_qbaVertex.isEmpty())
-            {
-                int pos = data.indexOf((char)(0xc3));
+                int pos = data.indexOf((char)(0xEC));
                 while (-1 != pos)
                 {
-                    this->m_qbaVertex.append(data.mid(pos, VERTEX_PACK_LEN - this->m_qbaVertex.length()));
-                    if (VERTEX_PACK_LEN == this->m_qbaVertex.length())
+                    this->m_qbaECG.append(data.mid(pos, ECG_DATA_PACK_LEN - this->m_qbaECG.length()));
+                    if (ECG_DATA_PACK_LEN == this->m_qbaECG.length())
                     {
-                        this->getPointSeries(this->m_qbaVertex);
-                        this->m_qbaVertex.clear();
-                        this->m_pVertexSeries.first = 0;
-                        this->m_pVertexSeries.second = 0;
+                        this->getPlotSeries(this->m_qbaECG);
+                        this->m_qbaECG.clear();
                     }
                     else
                     {
                         // do nothiing
                     }
-                    pos = data.indexOf((char)(0xc3), pos + VERTEX_PACK_LEN);
+                    pos = data.indexOf((char)(0xEC), pos + ECG_DATA_PACK_LEN);
                 }
             }
             else
             {
-                this->m_qbaVertex.append(data.mid(0, VERTEX_PACK_LEN - this->m_qbaVertex.length()));
-                if (VERTEX_PACK_LEN == this->m_qbaVertex.length())
+                this->m_qbaECG.append(data.mid(0, ECG_DATA_PACK_LEN - this->m_qbaECG.length()));
+                if (ECG_DATA_PACK_LEN == this->m_qbaECG.length())
                 {
-                    this->getPointSeries(this->m_qbaVertex);
-                    this->m_qbaVertex.clear();
-                    this->m_pVertexSeries.first = 0;
-                    this->m_pVertexSeries.second = 0;
+                    this->getPlotSeries(this->m_qbaECG);
+                    this->m_qbaECG.clear();
                 }
                 else
                 {
                     qDebug() << "qbaVertex error!!!";
                 }
             }
-        }
     }
     else
     {
-        this->m_qbaVertex.clear();
-        this->m_qbaVertexSeries.clear();
+        this->m_qbaECG.clear();
+        this->m_qbaECGSeries.clear();
         // g_vecVertexSeries.clear();
     }
 }
 
 vector<uint16_t> DataParser::getPlotSeries(const QByteArray &data)
 {
-    this->m_qbaWaveSeries = data.mid(2, WAVE_SERIES_LEN);
-    if (this->m_qbaWaveSeries.length() == WAVE_SERIES_LEN)
+    this->m_qbaECGSeries = data.mid(1, 2);
+    if (this->m_qbaECGSeries.length() == ECG_DATA_SERIES_LEN)
     {
-        // qDebug() << this->m_qbaWaveSeries;
-        unsigned short crc16 = crc16_modbus(reinterpret_cast<unsigned char *>(this->m_qbaWaveSeries.data()), this->m_qbaWaveSeries.length());
-        //            qDebug() << crc16;
-        //            qDebug() << (unsigned char)(crc16 >> 8);
-        //            qDebug() << (unsigned char)(crc16 & 0xff);
-        //            qDebug() << (unsigned char)(data.at(WAVE_PACK_LEN - 2));
-        //            qDebug() << (unsigned char)(data.at(WAVE_PACK_LEN - 1));
-        if ((unsigned char)(data.at(WAVE_PACK_LEN - 1)) == (unsigned char)(crc16 & 0xff) && (unsigned char)(data.at(WAVE_PACK_LEN - 2)) == (unsigned char)(crc16 >> 8))
+        if ((unsigned char)(data.at(ECG_DATA_PACK_LEN - 1)) == ((unsigned char)(data.at(ECG_DATA_PACK_LEN - 2))^(unsigned char)(data.at(ECG_DATA_PACK_LEN - 3))))
         {
+            uint16_t ECG_unit_value = (uint16_t)((this->m_qbaECGSeries.at(1) & 0xff) | (this->m_qbaECGSeries.at(0) << 8));
+            // qDebug() << ECG_unit_value;
             this->m_vPlotSeries.clear();
-            for (int i = 0; i < WAVE_SERIES_LEN; i += 2)
-            {
-                this->m_vPlotSeries.push_back((uint16_t)((this->m_qbaWaveSeries.at(i + 1) & 0xff) | (this->m_qbaWaveSeries.at(i) << 8)));
-            }
-            g_VecWaveSeries.clear();
-            g_VecWaveSeries = this->m_vPlotSeries;
+            this->m_vPlotSeries.push_back(ECG_unit_value);
+
+            if (gVecDataSeries.size() < MAX_SERIES_SIZE)
+                gVecDataSeries.push_back(ECG_unit_value);
         }
         else
         {
-            qDebug() << "crc16 check error!";
-            qDebug() << crc16;
-            qDebug() << (unsigned char)(crc16 >> 8);
-            qDebug() << (unsigned char)(crc16 & 0xff);
-            qDebug() << (unsigned char)(data.at(WAVE_PACK_LEN - 2));
-            qDebug() << (unsigned char)(data.at(WAVE_PACK_LEN - 1));
-            qDebug() << data.toHex();
+            qDebug() << data.at(ECG_DATA_PACK_LEN - 1);
         }
     }
 
-    this->m_qbaWaveSeries.clear();
+    this->m_qbaECGSeries.clear();
 
     return this->m_vPlotSeries;
-}
-
-pair<uint16_t, uint16_t> DataParser::getPointSeries(const QByteArray &data)
-{
-    this->m_pVertexSeries.first = 0;
-    this->m_pVertexSeries.second = 0;
-    this->m_qbaVertexSeries = data.mid(1, VERTEX_SERIES_LEN);
-    if (this->m_qbaVertexSeries.length() == VERTEX_SERIES_LEN)
-    {
-        if ((unsigned char)((unsigned char)(this->m_qbaVertexSeries.at(0)) ^ (unsigned char)(this->m_qbaVertexSeries.at(1)) ^ (unsigned char)(this->m_qbaVertexSeries.at(2)) ^ (unsigned char)(this->m_qbaVertexSeries.at(3))) == (unsigned char)(data.at(VERTEX_PACK_LEN - 1)))
-        {
-            this->m_pVertexSeries.first = (uint16_t)((this->m_qbaVertexSeries.at(0) << 8) | (this->m_qbaVertexSeries.at(1) & 0xff));
-            this->m_pVertexSeries.second = (uint16_t)((this->m_qbaVertexSeries.at(2) << 8) | (this->m_qbaVertexSeries.at(3) & 0xff));
-            if (g_vecVertexSeries.size() < 1024)
-            {
-                g_vecVertexSeries.push_back(this->m_pVertexSeries);
-            }
-        }
-        else
-        {
-            qDebug() << data.toHex();
-            qDebug() << "xor check: " << (unsigned char)((unsigned char)(this->m_qbaVertexSeries.at(0)) ^ (unsigned char)(this->m_qbaVertexSeries.at(1)) ^ (unsigned char)(this->m_qbaVertexSeries.at(2)) ^ (unsigned char)(this->m_qbaVertexSeries.at(3)));
-            qDebug() << "vertex data pairity: " << (unsigned char)(data.at(VERTEX_PACK_LEN - 1));
-        }
-    }
-    this->m_qbaVertexSeries.clear();
-
-    return this->m_pVertexSeries;
 }

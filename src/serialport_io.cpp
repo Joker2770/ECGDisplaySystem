@@ -157,7 +157,7 @@ void SerialPortIO::closePort()
 
 QByteArray SerialPortIO::readData()
 {
-    return this->m_serial_port->readLine();
+    return this->m_serial_port->readAll();
 }
 
 int SerialPortIO::writeData(const QString &data)

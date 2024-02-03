@@ -5,12 +5,14 @@
 #include <QDebug>
 #include <QMessageBox>
 
-vector<uint32_t> gVecDataSeries;
+vector<uint16_t> gVecDataSeries;
 
 SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
                                                 ui(new Ui::SettingWindow)
 {
     ui->setupUi(this);
+
+    this->setWindowModality(Qt::NonModal);
 
     this->serial_port_io = new SerialPortIO();
     this->m_timer = new QTimer();
@@ -19,6 +21,8 @@ SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
     this->m_timer->start(500);
 
     this->m_customs = new Customs("ECGDisplaySystem");
+
+    this->m_data_parser = new DataParser();
 
     QList<QString> baud_list;
     baud_list << "1200"
@@ -136,6 +140,11 @@ SettingWindow::~SettingWindow()
     {
         delete this->m_customs;
         this->m_customs = nullptr;
+    }
+    if (nullptr != this->m_data_parser)
+    {
+        delete this->m_data_parser;
+        this->m_data_parser = nullptr;
     }
 }
 
@@ -325,10 +334,9 @@ void SettingWindow::OnRead()
     QByteArray qBA;
     qBA.clear();
     qBA = this->serial_port_io->readData();
-    // qDebug() << "qBa: " << qBA.toHex();
+    // qDebug() << "qBa: " << qBA;
 
-    if (gVecDataSeries.size() < MAX_SERIES_SIZE)
-        gVecDataSeries.push_back(qBA.toUInt());
+    this->m_data_parser->ECGDataJoint(qBA);
 }
 
 void SettingWindow::OnOpen()

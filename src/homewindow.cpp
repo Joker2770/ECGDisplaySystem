@@ -8,19 +8,23 @@
 #include <QTextStream>
 #include <QDateTime>
 #include <QDebug>
+#include <atomic>
 
-vector<uint32_t> gVecDataQueue;
+// vector<uint16_t> gVecDataQueue;
+atomic_char16_t g_data_unit;
 
 HomeWindow::HomeWindow(QWidget *parent) : QWidget(parent),
                                           ui(new Ui::HomeWindow)
 {
     ui->setupUi(this);
 
+    this->setWindowModality(Qt::NonModal);
+
     this->m_timer_1 = new QTimer();
     this->m_timer_2 = new QTimer();
 
     this->m_timer_1->setTimerType(Qt::PreciseTimer);
-    this->m_timer_1->start(1);
+    this->m_timer_1->start(3);
 
     this->m_timer_2->setTimerType(Qt::PreciseTimer);
     this->m_timer_2->start(1000);
@@ -54,9 +58,10 @@ void HomeWindow::OnTimer1TimeOut()
 {
     this->m_out_text_size = ui->textBrowser->toPlainText().length();
 
+    qDebug() << gVecDataSeries;
     if (!gVecDataSeries.empty())
     {
-        int data_unit = gVecDataSeries.front();
+        g_data_unit.store(gVecDataSeries.front(), std::memory_order_relaxed);
         gVecDataSeries.erase(gVecDataSeries.begin());
 
         if (this->ui->home_data_out_rbtn->isChecked())
@@ -65,29 +70,29 @@ void HomeWindow::OnTimer1TimeOut()
             if (this->ui->home_datetime_rbtn->isChecked())
             {
                 QString qsDateTime = QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss.zzz");
-                sOut = QString::number(data_unit) + "," + qsDateTime;
+                sOut = QString::number(g_data_unit.load(std::memory_order_relaxed)) + "," + qsDateTime;
             }
             else
             {
-                sOut = QString::number(data_unit) + ",";
+                sOut = QString::number(g_data_unit.load(std::memory_order_relaxed)) + ",";
             }
             ui->textBrowser->append(sOut);
         }
 
-        if (gVecDataQueue.size() < MAX_QUEUE_SIZE)
-        {
-            gVecDataQueue.push_back(data_unit);
-        }
-        else if (gVecDataQueue.size() == MAX_QUEUE_SIZE)
-        {
-            gVecDataQueue.push_back(data_unit);
-            gVecDataQueue.erase(gVecDataQueue.begin());
-        }
-        else
-        {
-            qDebug() << "gVecDataQueue size overflow!";
-            gVecDataQueue.erase(gVecDataQueue.begin());
-        }
+//        if (gVecDataQueue.size() < MAX_QUEUE_SIZE)
+//        {
+//            gVecDataQueue.push_back(g_data_unit.load(std::memory_order_relaxed));
+//        }
+//        else if (gVecDataQueue.size() == MAX_QUEUE_SIZE)
+//        {
+//            gVecDataQueue.erase(gVecDataQueue.begin());
+//            gVecDataQueue.push_back(g_data_unit.load(std::memory_order_relaxed));
+//        }
+//        else
+//        {
+//            qDebug() << "gVecDataQueue size overflow!";
+//            gVecDataQueue.erase(gVecDataQueue.begin());
+//        }
     }
 }
 

@@ -6,6 +6,7 @@
 
 #include "serialport_io.h"
 #include "customs.h"
+#include "data_parser.h"
 
 namespace Ui
 {
@@ -47,6 +48,7 @@ private:
     QTimer *m_timer;
 
     Customs *m_customs;
+    DataParser *m_data_parser;
 };
 
 #endif // SETTINGWINDOW_H

@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->setWindowModality(Qt::NonModal);
+
     this->setWindowIcon(QIcon(":/icons/icon.ico"));
     this->setWindowIconText(tr("ECG with AD8232"));
 

@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/customs.cpp \
+    src/data_parser.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/homewindow.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 
 HEADERS += \
     src/customs.h \
+    src/data_parser.h \
     src/global.h \
     src/mainwindow.h \
     src/homewindow.h \

@@ -8,8 +8,6 @@
 #ifndef __DATA_PARSER_H__
 #define __DATA_PARSER_H__
 
-#include "global.h"
-
 #include <QString>
 
 #include <vector>
@@ -22,23 +20,16 @@ public:
     DataParser();
     virtual ~DataParser();
 
-    void waveDataJoint(const QByteArray &data);
-    void vertexDataJoint(const QByteArray &data);
+    void ECGDataJoint(const QByteArray &data);
 
     vector<uint16_t> getPlotSeries(const QByteArray &data);
-    pair<uint16_t, uint16_t> getPointSeries(const QByteArray &data);
 
 public:
     vector<uint16_t> m_vPlotSeries;
-    pair<uint16_t, uint16_t> m_pVertexSeries;
 
 private:
-    QByteArray m_qbaWave;
-    QByteArray m_qbaVertex;
-    QByteArray m_qbaWaveSeries;
-    QByteArray m_qbaVertexSeries;
-
-    bool m_bHandleWave;
+    QByteArray m_qbaECG;
+    QByteArray m_qbaECGSeries;
 };
 
 #endif
