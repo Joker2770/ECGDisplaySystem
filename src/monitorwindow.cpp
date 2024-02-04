@@ -41,7 +41,7 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
     ui->graphicsView->setChart(this->m_chart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
-    this->m_timer->start(150);
+    this->m_timer->start(100);
 
     connect(this->m_timer, SIGNAL(timeout()), this, SLOT(OnTimerTimeOut()));
 }
