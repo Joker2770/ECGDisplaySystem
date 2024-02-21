@@ -58,7 +58,7 @@ void HomeWindow::OnTimer1TimeOut()
 {
     this->m_out_text_size = ui->textBrowser->toPlainText().length();
 
-    qDebug() << gVecDataSeries;
+    // qDebug() << gVecDataSeries;
     if (!gVecDataSeries.empty())
     {
         g_data_unit.store(gVecDataSeries.front(), std::memory_order_relaxed);

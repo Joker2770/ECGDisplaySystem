@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowIconText(tr("ECG with AD8232"));
 
     // this->showFullScreen();
-    this->setWindowFlags((windowFlags() | Qt::WindowStaysOnTopHint));
+    // this->setWindowFlags((windowFlags() | Qt::WindowStaysOnTopHint));
 
     this->m_label_serialport_stat = new QLabel("serial port status", this);
     this->m_label_size = new QLabel("out size", this);
