@@ -1,4 +1,7 @@
 # ECGDisplaySystem
+
+[![CMake on a single platform](https://github.com/Joker2770/ECGDisplaySystem/actions/workflows/cmake-single-platform.yml/badge.svg)](https://github.com/Joker2770/ECGDisplaySystem/actions/workflows/cmake-single-platform.yml)
+
 ECG with ad8232 module.
 
 # References
