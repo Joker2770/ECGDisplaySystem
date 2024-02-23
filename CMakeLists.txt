@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Charts SerialPort LinguistTools)
 
-set(TS_FILES WaveDisplaySystem_zh_CN.ts)
+set(TS_FILES ECGDisplaySystem_zh_CN.ts)
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -30,6 +30,8 @@ set(PROJECT_SOURCES
         src/settingwindow.ui
         src/serialport_io.h
         src/serialport_io.cpp
+        src/data_parser.h
+        src/data_parser.cpp
         src/customs.h
         src/customs.cpp
         src/global.h
@@ -38,25 +40,25 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(WaveDisplaySystem
+    qt_add_executable(ECGDisplaySystem
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET WaveDisplaySystem APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET ECGDisplaySystem APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 else()
     if(ANDROID)
-        add_library(WaveDisplaySystem SHARED
+        add_library(ECGDisplaySystem SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(WaveDisplaySystem
+        add_executable(ECGDisplaySystem
             ${PROJECT_SOURCES}
         )
     endif()
@@ -64,15 +66,15 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(WaveDisplaySystem PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::SerialPort)
+target_link_libraries(ECGDisplaySystem PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::SerialPort)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.WaveDisplaySystem)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.ECGDisplaySystem)
 endif()
-set_target_properties(WaveDisplaySystem PROPERTIES
+set_target_properties(ECGDisplaySystem PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -81,12 +83,12 @@ set_target_properties(WaveDisplaySystem PROPERTIES
 )
 
 include(GNUInstallDirs)
-install(TARGETS WaveDisplaySystem
+install(TARGETS ECGDisplaySystem
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(WaveDisplaySystem)
+    qt_finalize_executable(ECGDisplaySystem)
 endif()
