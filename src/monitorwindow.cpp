@@ -24,12 +24,12 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
     this->m_timer->setTimerType(Qt::PreciseTimer);
 
     this->m_axisX->setRange(QDateTime::currentDateTime().toMSecsSinceEpoch(), QDateTime::currentDateTime().addSecs(MAX_QUEUE_SIZE - 1).toMSecsSinceEpoch());
-    this->m_axisX->setTitleText(tr("position"));
+    this->m_axisX->setTitleText(tr("time"));
 
     this->m_axisY->setRange(0, 4096);
-    this->m_axisY->setTitleText(tr("frequency"));
+    this->m_axisY->setTitleText(tr("power"));
 
-    this->m_chart->setTitle(tr("wave graph"));
+    this->m_chart->setTitle(tr("ECG graph"));
     this->m_chart->addSeries(this->m_splineSeries);
     this->m_chart->addAxis(this->m_axisX, Qt::AlignBottom);
     this->m_chart->addAxis(this->m_axisY, Qt::AlignLeft);

@@ -1,4 +1,0 @@
-D:/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/ECGDisplaySystem.dir
-D:/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/INSTALL.dir
-D:/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/ALL_BUILD.dir
-D:/open_sources/repos/ECGDisplaySystem/build/CMakeFiles/ZERO_CHECK.dir
