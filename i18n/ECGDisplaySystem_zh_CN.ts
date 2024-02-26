@@ -47,38 +47,38 @@
         <translation type="vanished">文本文件（*.csv)</translation>
     </message>
     <message>
-        <location filename="../src/homewindow.cpp" line="174"/>
-        <location filename="../src/homewindow.cpp" line="200"/>
+        <location filename="../src/homewindow.cpp" line="129"/>
+        <location filename="../src/homewindow.cpp" line="155"/>
         <source>Text Files</source>
         <translation>文本文件</translation>
     </message>
     <message>
-        <location filename="../src/homewindow.cpp" line="174"/>
-        <location filename="../src/homewindow.cpp" line="200"/>
+        <location filename="../src/homewindow.cpp" line="129"/>
+        <location filename="../src/homewindow.cpp" line="155"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="../src/homewindow.cpp" line="180"/>
-        <location filename="../src/homewindow.cpp" line="207"/>
+        <location filename="../src/homewindow.cpp" line="135"/>
+        <location filename="../src/homewindow.cpp" line="162"/>
         <source>Write File</source>
         <translation>可写文件</translation>
     </message>
     <message>
-        <location filename="../src/homewindow.cpp" line="180"/>
-        <location filename="../src/homewindow.cpp" line="207"/>
+        <location filename="../src/homewindow.cpp" line="135"/>
+        <location filename="../src/homewindow.cpp" line="162"/>
         <source>Cannot open file:</source>
         <translation>不能打开文件：</translation>
     </message>
     <message>
-        <location filename="../src/homewindow.cpp" line="189"/>
-        <location filename="../src/homewindow.cpp" line="218"/>
+        <location filename="../src/homewindow.cpp" line="144"/>
+        <location filename="../src/homewindow.cpp" line="173"/>
         <source>Path</source>
         <translation>路径</translation>
     </message>
     <message>
-        <location filename="../src/homewindow.cpp" line="189"/>
-        <location filename="../src/homewindow.cpp" line="218"/>
+        <location filename="../src/homewindow.cpp" line="144"/>
+        <location filename="../src/homewindow.cpp" line="173"/>
         <source>You did not input any text.</source>
         <translation>您没有输入任何文本。</translation>
     </message>
@@ -118,56 +118,52 @@
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="14"/>
         <source>SHANGHAI HB AUTO MACHINERY</source>
-        <translation>上海恒博自动化</translation>
+        <translation type="vanished">上海恒博自动化</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="28"/>
-        <location filename="../src/mainwindow.cpp" line="119"/>
         <source>variance_f:</source>
-        <translation>f方差：</translation>
+        <translation type="vanished">f方差：</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="29"/>
-        <location filename="../src/mainwindow.cpp" line="118"/>
         <source>variance_u:</source>
-        <translation>u方差：</translation>
+        <translation type="vanished">u方差：</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="101"/>
+        <location filename="../src/mainwindow.cpp" line="16"/>
+        <source>ECG with AD8232</source>
+        <translation>AD8232驱动ECG</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="70"/>
         <source>Tips</source>
         <translation>提示</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="101"/>
+        <location filename="../src/mainwindow.cpp" line="70"/>
         <source>Confirm quit?</source>
         <translation>确认退出？</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="115"/>
+        <location filename="../src/mainwindow.cpp" line="84"/>
         <source>out size:</source>
         <translation>输出大小：</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="27"/>
-        <location filename="../src/mainwindow.cpp" line="116"/>
         <source>avg_u:</source>
-        <translation>u均值：</translation>
+        <translation type="vanished">u均值：</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="26"/>
-        <location filename="../src/mainwindow.cpp" line="117"/>
         <source>avg_f:</source>
-        <translation>f均值：</translation>
+        <translation type="vanished">f均值：</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="124"/>
+        <location filename="../src/mainwindow.cpp" line="89"/>
         <source>serial port connected!</source>
         <translation>串口连接！</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="129"/>
+        <location filename="../src/mainwindow.cpp" line="94"/>
         <source>serial port disconnected!</source>
         <translation>串口断开！</translation>
     </message>
@@ -193,19 +189,31 @@
         <translation type="vanished">暂停</translation>
     </message>
     <message>
-        <location filename="../src/monitorwindow.cpp" line="26"/>
         <source>position</source>
-        <translation>位置</translation>
+        <translation type="vanished">位置</translation>
     </message>
     <message>
-        <location filename="../src/monitorwindow.cpp" line="29"/>
         <source>frequency</source>
-        <translation>频率</translation>
+        <translation type="vanished">频率</translation>
     </message>
     <message>
-        <location filename="../src/monitorwindow.cpp" line="31"/>
         <source>wave graph</source>
-        <translation>波形图</translation>
+        <translation type="vanished">波形图</translation>
+    </message>
+    <message>
+        <location filename="../src/monitorwindow.cpp" line="27"/>
+        <source>time</source>
+        <translation>时间</translation>
+    </message>
+    <message>
+        <location filename="../src/monitorwindow.cpp" line="30"/>
+        <source>power</source>
+        <translation>强度</translation>
+    </message>
+    <message>
+        <location filename="../src/monitorwindow.cpp" line="32"/>
+        <source>ECG graph</source>
+        <translation>ECG图谱</translation>
     </message>
 </context>
 <context>
@@ -313,16 +321,16 @@
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../src/settingwindow.cpp" line="304"/>
         <location filename="../src/settingwindow.cpp" line="310"/>
-        <location filename="../src/settingwindow.cpp" line="323"/>
+        <location filename="../src/settingwindow.cpp" line="316"/>
+        <location filename="../src/settingwindow.cpp" line="329"/>
         <source>Tips</source>
         <translation>提示</translation>
     </message>
     <message>
-        <location filename="../src/settingwindow.cpp" line="304"/>
         <location filename="../src/settingwindow.cpp" line="310"/>
-        <location filename="../src/settingwindow.cpp" line="323"/>
+        <location filename="../src/settingwindow.cpp" line="316"/>
+        <location filename="../src/settingwindow.cpp" line="329"/>
         <source>Take effect after restart program!</source>
         <translation>重启程序生效！</translation>
     </message>
