@@ -18,7 +18,7 @@ SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
     this->m_timer = new QTimer();
     // this->m_timer->setTimerType(Qt::PreciseTimer);
 
-    this->m_timer->start(500);
+    this->m_timer->start(10000);
 
     this->m_customs = new Customs("ECGDisplaySystem");
 
@@ -150,11 +150,14 @@ SettingWindow::~SettingWindow()
 
 void SettingWindow::updateAvialabeSerialPorts()
 {
-    QList<QString> port_name_list = this->serial_port_io->scanPort();
-    ui->setting_port_cb->clear();
-    for (int i = 0; i < port_name_list.size(); ++i)
+    if (!(g_bSerialPortOpen))
     {
-        ui->setting_port_cb->addItem(port_name_list.at(i));
+        QList<QString> port_name_list = this->serial_port_io->scanPort();
+        ui->setting_port_cb->clear();
+        for (int i = 0; i < port_name_list.size(); ++i)
+        {
+            ui->setting_port_cb->addItem(port_name_list.at(i));
+        }
     }
 }
 
