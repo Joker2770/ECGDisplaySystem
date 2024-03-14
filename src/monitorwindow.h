@@ -6,6 +6,7 @@
 #include <QSplineSeries>
 #include <QValueAxis>
 #include <QTimer>
+#include <QtCharts>
 
 #include <iostream>
 using namespace std;
@@ -34,7 +35,7 @@ private:
     QSplineSeries *m_splineSeries;
 
     QValueAxis *m_axisY;
-    QValueAxis *m_axisX;
+    QDateTimeAxis *m_axisX;
 
     QChart *m_chart;
 

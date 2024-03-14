@@ -15,7 +15,7 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
     this->setWindowModality(Qt::NonModal);
 
     this->m_splineSeries = new QSplineSeries();
-    this->m_axisX = new QValueAxis();
+    this->m_axisX = new QDateTimeAxis();
     this->m_axisY = new QValueAxis();
 
     this->m_chart = new QChart();
@@ -23,10 +23,13 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
     this->m_timer = new QTimer();
     this->m_timer->setTimerType(Qt::PreciseTimer);
 
-    this->m_axisX->setRange(QDateTime::currentDateTime().toMSecsSinceEpoch(), QDateTime::currentDateTime().addSecs(MAX_QUEUE_SIZE - 1).toMSecsSinceEpoch());
+    this->m_axisX->setFormat("hh:mm:ss.zzz");
+    this->m_axisX->setRange(QDateTime::currentDateTime(), QDateTime::currentDateTime().addSecs(MAX_QUEUE_SIZE / ECG_DATA_PER_SECS - 1));
+    this->m_axisX->setTickCount(MAX_QUEUE_SIZE / ECG_DATA_PER_SECS + 1);
     this->m_axisX->setTitleText(tr("time"));
 
     this->m_axisY->setRange(0, 4096);
+    this->m_axisY->setTickCount(17);
     this->m_axisY->setTitleText(tr("power"));
 
     this->m_chart->setTitle(tr("ECG graph"));
@@ -41,7 +44,7 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
     ui->graphicsView->setChart(this->m_chart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
-    this->m_timer->start(100);
+    this->m_timer->start(1000 / ECG_DATA_PER_SECS);
 
     connect(this->m_timer, SIGNAL(timeout()), this, SLOT(OnTimerTimeOut()));
 }
@@ -81,12 +84,12 @@ void MonitorWindow::OnTimerTimeOut()
 {
     if (this->ui->radioButton->isChecked())
     {
-        if (this->m_splineSeries->count() >= MAX_QUEUE_SIZE) {
+        if (this->m_splineSeries->count() >= MAX_QUEUE_SIZE)
+        {
             this->m_splineSeries->removePoints(0, 1);
         }
         qint64 timestamp = QDateTime::currentDateTime().toMSecsSinceEpoch();
         this->m_splineSeries->append(timestamp, g_data_unit.load(std::memory_order_relaxed));
-        this->m_axisX->setRange(this->m_splineSeries->at(0).x()
-                                , this->m_splineSeries->at(this->m_splineSeries->count() - 1).x());
+        this->m_axisX->setRange(QDateTime::fromMSecsSinceEpoch(this->m_splineSeries->at(0).x()), QDateTime::fromMSecsSinceEpoch(this->m_splineSeries->at(this->m_splineSeries->count() - 1).x()));
     }
 }
