@@ -150,14 +150,11 @@ SettingWindow::~SettingWindow()
 
 void SettingWindow::updateAvialabeSerialPorts()
 {
-    if (!(g_bSerialPortOpen))
+    QList<QString> port_name_list = this->serial_port_io->scanPort();
+    ui->setting_port_cb->clear();
+    for (int i = 0; i < port_name_list.size(); ++i)
     {
-        QList<QString> port_name_list = this->serial_port_io->scanPort();
-        ui->setting_port_cb->clear();
-        for (int i = 0; i < port_name_list.size(); ++i)
-        {
-            ui->setting_port_cb->addItem(port_name_list.at(i));
-        }
+        ui->setting_port_cb->addItem(port_name_list.at(i));
     }
 }
 
