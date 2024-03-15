@@ -29,9 +29,6 @@
 
 #include <QSettings>
 
-#include <iostream>
-using namespace std;
-
 class Customs
 {
 public:

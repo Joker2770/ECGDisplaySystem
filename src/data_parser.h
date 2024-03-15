@@ -11,8 +11,6 @@
 #include <QString>
 
 #include <vector>
-#include <iostream>
-using namespace std;
 
 class DataParser
 {
@@ -22,10 +20,10 @@ public:
 
     void ECGDataJoint(const QByteArray &data);
 
-    vector<uint16_t> getPlotSeries(const QByteArray &data);
+    std::vector<uint16_t> getPlotSeries(const QByteArray &data);
 
 public:
-    vector<uint16_t> m_vPlotSeries;
+    std::vector<uint16_t> m_vPlotSeries;
 
 private:
     QByteArray m_qbaECG;

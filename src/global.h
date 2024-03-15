@@ -16,11 +16,9 @@
 
 #include <vector>
 #include <atomic>
-#include <iostream>
-using namespace std;
 
 // extern vector<uint16_t> gVecDataQueue;
-extern vector<uint16_t> gVecDataSeries;
-extern atomic_char16_t g_data_unit;
+extern std::vector<uint16_t> gVecDataSeries;
+extern std::atomic_char16_t g_data_unit;
 
 #endif

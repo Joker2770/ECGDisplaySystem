@@ -66,7 +66,7 @@ void DataParser::ECGDataJoint(const QByteArray &data)
     }
 }
 
-vector<uint16_t> DataParser::getPlotSeries(const QByteArray &data)
+std::vector<uint16_t> DataParser::getPlotSeries(const QByteArray &data)
 {
     this->m_qbaECGSeries = data.mid(1, 2);
     if (this->m_qbaECGSeries.length() == ECG_DATA_SERIES_LEN)

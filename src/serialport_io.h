@@ -11,9 +11,6 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 
-#include <iostream>
-using namespace std;
-
 enum DATA_BITS_LEN
 {
     Data5,

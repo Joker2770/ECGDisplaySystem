@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <QMessageBox>
 
-vector<uint16_t> gVecDataSeries;
+std::vector<uint16_t> gVecDataSeries;
 
 SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
                                                 ui(new Ui::SettingWindow)

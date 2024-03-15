@@ -9,6 +9,26 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# cpack
+if(CMAKE_HOST_UNIX)
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+
+    set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+    set(CPACK_PACKAGE_DIRECTORY ${CMAKE_BINARY_DIR})
+    set(CPACK_SOURCE_IGNORE_FILES build)
+
+    set(CPACK_PACKAGE_CONTACT "yjt950840@outlook.com")
+    set(CPACK_PACKAGE_DESCRIPTION "ECG with ad8232 module.")
+
+    set(CPACK_SET_DESTDIR ON)
+    # 设置安装到的目录路径
+    set(CMAKE_INSTALL_BINDIR "/opt/ECGDisplaySystem")
+
+    # include(InstallRequiredSystemLibraries)
+    include(CPack)
+endif()
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Charts SerialPort LinguistTools)
 

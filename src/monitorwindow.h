@@ -8,9 +8,6 @@
 #include <QTimer>
 #include <QtCharts>
 
-#include <iostream>
-using namespace std;
-
 QT_CHARTS_USE_NAMESPACE
 
 namespace Ui
