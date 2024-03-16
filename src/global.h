@@ -12,7 +12,7 @@
 #define MAX_SERIES_SIZE (1024)
 #define ECG_DATA_PACK_LEN (4)
 #define ECG_DATA_SERIES_LEN (2)
-#define ECG_DATA_PER_SECS (100)
+#define ECG_DATA_PER_SECS (10)
 
 #include <vector>
 #include <atomic>

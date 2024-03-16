@@ -201,17 +201,17 @@
         <translation type="vanished">波形图</translation>
     </message>
     <message>
-        <location filename="../src/monitorwindow.cpp" line="27"/>
+        <location filename="../src/monitorwindow.cpp" line="29"/>
         <source>time</source>
         <translation>时间</translation>
     </message>
     <message>
-        <location filename="../src/monitorwindow.cpp" line="30"/>
+        <location filename="../src/monitorwindow.cpp" line="33"/>
         <source>power</source>
         <translation>强度</translation>
     </message>
     <message>
-        <location filename="../src/monitorwindow.cpp" line="32"/>
+        <location filename="../src/monitorwindow.cpp" line="35"/>
         <source>ECG graph</source>
         <translation>ECG图谱</translation>
     </message>

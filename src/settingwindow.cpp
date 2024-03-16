@@ -103,6 +103,7 @@ SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
     else
         ui->setting_language_cb->setCurrentIndex(1);
 
+    this->updateAvialabeSerialPorts();
     this->serial_port_io->setBaudrate(921600);
     this->serial_port_io->setDataBitsLength(DATA_BITS_LEN::Data8);
     this->serial_port_io->setStopBitsLength(STOP_BITS_LEN::OneStop);
