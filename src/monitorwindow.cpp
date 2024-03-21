@@ -37,6 +37,21 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
     this->m_chart->addAxis(this->m_axisX, Qt::AlignBottom);
     this->m_chart->addAxis(this->m_axisY, Qt::AlignLeft);
 
+    QList<QString> theme_list;
+    theme_list << "BlueCerulean"
+               << "BlueIcy"
+               << "BlueNcs"
+               << "BrownSand"
+               << "Dark"
+               << "HighContrast"
+               << "Light"
+               << "Qt";
+    for (int i = 0; i < 8; i++)
+    {
+        this->ui->theme_cb->addItem(theme_list[i]);
+    }
+    this->ui->theme_cb->setCurrentIndex(7);
+
     /* after addSeries*/
     this->m_splineSeries->attachAxis(this->m_axisX);
     this->m_splineSeries->attachAxis(this->m_axisY);
@@ -47,6 +62,7 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
     this->m_timer->start(1000 / ECG_DATA_PER_SECS);
 
     connect(this->m_timer, SIGNAL(timeout()), this, SLOT(OnTimerTimeOut()));
+    connect(this->ui->theme_cb, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeTheme(int)));
 }
 
 MonitorWindow::~MonitorWindow()
@@ -91,5 +107,39 @@ void MonitorWindow::OnTimerTimeOut()
         qint64 timestamp = QDateTime::currentDateTime().toMSecsSinceEpoch();
         this->m_splineSeries->append(timestamp, g_data_unit.load(std::memory_order_relaxed));
         this->m_axisX->setRange(QDateTime::fromMSecsSinceEpoch(this->m_splineSeries->at(0).x()), QDateTime::fromMSecsSinceEpoch(this->m_splineSeries->at(this->m_splineSeries->count() - 1).x()));
+    }
+}
+
+void MonitorWindow::OnChangeTheme(int idx)
+{
+    switch (idx)
+    {
+    case 0:
+        this->m_chart->setTheme(QChart::ChartTheme::ChartThemeBlueCerulean);
+        break;
+    case 1:
+        this->m_chart->setTheme(QChart::ChartTheme::ChartThemeBlueIcy);
+        break;
+    case 2:
+        this->m_chart->setTheme(QChart::ChartTheme::ChartThemeBlueNcs);
+        break;
+    case 3:
+        this->m_chart->setTheme(QChart::ChartTheme::ChartThemeBrownSand);
+        break;
+    case 4:
+        this->m_chart->setTheme(QChart::ChartTheme::ChartThemeDark);
+        break;
+    case 5:
+        this->m_chart->setTheme(QChart::ChartTheme::ChartThemeHighContrast);
+        break;
+    case 6:
+        this->m_chart->setTheme(QChart::ChartTheme::ChartThemeLight);
+        break;
+    case 7:
+        this->m_chart->setTheme(QChart::ChartTheme::ChartThemeQt);
+        break;
+    default:
+        this->m_chart->setTheme(QChart::ChartTheme::ChartThemeQt);
+        break;
     }
 }

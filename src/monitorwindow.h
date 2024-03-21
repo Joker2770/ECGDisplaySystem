@@ -25,6 +25,7 @@ public:
 
 private slots:
     void OnTimerTimeOut();
+    void OnChangeTheme(int _idx);
 
 private:
     Ui::MonitorWindow *ui;
