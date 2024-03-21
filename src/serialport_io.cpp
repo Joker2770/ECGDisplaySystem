@@ -20,9 +20,9 @@ SerialPortIO::SerialPortIO(const SerialPortIO &obj)
 
 SerialPortIO::~SerialPortIO()
 {
-    this->m_serial_port->close();
     if (nullptr != this->m_serial_port)
     {
+        this->m_serial_port->close();
         delete this->m_serial_port;
         this->m_serial_port = nullptr;
     }
