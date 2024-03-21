@@ -46,6 +46,7 @@ class SerialPortIO
 {
 public:
     SerialPortIO();
+    SerialPortIO(const SerialPortIO &_serial_port_io);
     virtual ~SerialPortIO();
 
     QList<QString> scanPort();

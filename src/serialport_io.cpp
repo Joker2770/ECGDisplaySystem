@@ -13,6 +13,11 @@ SerialPortIO::SerialPortIO()
     this->m_serial_port = new QSerialPort();
 }
 
+SerialPortIO::SerialPortIO(const SerialPortIO &obj)
+{
+    this->m_serial_port = obj.m_serial_port;
+}
+
 SerialPortIO::~SerialPortIO()
 {
     this->m_serial_port->close();
