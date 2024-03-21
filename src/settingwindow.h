@@ -25,7 +25,7 @@ public:
     bool g_bSerialPortOpen;
 
 public slots:
-    void updateAvialabeSerialPorts();
+    void updateAvailableSerialPorts();
 
 protected slots:
     void updatePort(const QString &_sPort);

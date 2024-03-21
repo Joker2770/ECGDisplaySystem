@@ -103,7 +103,7 @@ SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
     else
         ui->setting_language_cb->setCurrentIndex(1);
 
-    this->updateAvialabeSerialPorts();
+    this->updateAvailableSerialPorts();
     this->serial_port_io->setBaudrate(921600);
     this->serial_port_io->setDataBitsLength(DATA_BITS_LEN::Data8);
     this->serial_port_io->setStopBitsLength(STOP_BITS_LEN::OneStop);
@@ -149,7 +149,7 @@ SettingWindow::~SettingWindow()
     }
 }
 
-void SettingWindow::updateAvialabeSerialPorts()
+void SettingWindow::updateAvailableSerialPorts()
 {
     QList<QString> port_name_list = this->serial_port_io->scanPort();
     ui->setting_port_cb->clear();
@@ -357,5 +357,5 @@ void SettingWindow::OnIsOpen()
     g_bSerialPortOpen = this->serial_port_io->isPortOpening();
     // qDebug() << "isOpen: " << g_bSerialPortOpen;
 
-    this->updateAvialabeSerialPorts();
+    this->updateAvailableSerialPorts();
 }
