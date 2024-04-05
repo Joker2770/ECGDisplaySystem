@@ -153,9 +153,14 @@ void SettingWindow::updateAvailableSerialPorts()
 {
     QList<QString> port_name_list = this->serial_port_io->scanPort();
     ui->setting_port_cb->clear();
-    for (int i = 0; i < port_name_list.size(); ++i)
+    if (port_name_list.size() > 0)
     {
-        ui->setting_port_cb->addItem(port_name_list.at(i));
+        for (int i = 0; i < port_name_list.size(); ++i)
+        {
+            ui->setting_port_cb->addItem(port_name_list.at(i));
+        }
+
+        this->serial_port_io->setPort(port_name_list.at(0));
     }
 }
 

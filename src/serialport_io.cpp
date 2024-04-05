@@ -146,7 +146,13 @@ bool SerialPortIO::setFlowControl(FLOW_CONTROL flow_control)
 bool SerialPortIO::openPort()
 {
     this->m_serial_port->setReadBufferSize(1024);
-    return this->m_serial_port->open(QIODevice::ReadWrite);
+    bool tmp_is_open = false;
+    tmp_is_open = this->m_serial_port->isOpen();
+    if(!tmp_is_open)
+        tmp_is_open = this->m_serial_port->open(QIODevice::ReadWrite);
+    if (tmp_is_open)
+        this->m_serial_port->clear();
+    return tmp_is_open;
 }
 
 bool SerialPortIO::isPortOpening()
@@ -156,7 +162,8 @@ bool SerialPortIO::isPortOpening()
 
 void SerialPortIO::closePort()
 {
-    this->m_serial_port->clear();
+    if (this->m_serial_port->isOpen())
+        this->m_serial_port->clear();
     this->m_serial_port->close();
 }
 
