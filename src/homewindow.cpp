@@ -178,4 +178,5 @@ void HomeWindow::OnAutoSave()
 void HomeWindow::OnClear()
 {
     this->ui->textBrowser->clear();
+    this->ui->textBrowser->append("\n");
 }
