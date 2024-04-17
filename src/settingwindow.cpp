@@ -36,7 +36,7 @@ SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
               << "230400"
               << "460800"
               << "921600";
-    for (int i = 0; i < 11; i++)
+    for (int i = 0; i < baud_list.size(); i++)
     {
         ui->setting_baudrate_cb->addItem(baud_list[i]);
     }
@@ -59,7 +59,7 @@ SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
                 << "Odd"
                 << "Space"
                 << "Mark";
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < parity_list.size(); i++)
     {
         ui->setting_parity_cb->addItem(parity_list[i]);
     }
@@ -69,7 +69,7 @@ SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
     stop_list << "1"
               << "1.5"
               << "2";
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < stop_list.size(); i++)
     {
         ui->setting_stopbits_cb->addItem(stop_list[i]);
     }
@@ -79,7 +79,7 @@ SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
     flow_control_list << "NoFlowControl"
                       << "HardwareControl"
                       << "SoftwareControl";
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < flow_control_list.size(); i++)
     {
         ui->setting_flowcontrol_cb->addItem(flow_control_list[i]);
     }
@@ -92,7 +92,7 @@ SettingWindow::SettingWindow(QWidget *parent) : QWidget(parent),
     QList<QString> language_list;
     language_list << "zh_CN"
                   << "en_US";
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < language_list.size(); i++)
     {
         ui->setting_language_cb->addItem(language_list[i]);
     }

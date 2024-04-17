@@ -46,7 +46,7 @@ MonitorWindow::MonitorWindow(QWidget *parent) : QWidget(parent),
                << "HighContrast"
                << "Light"
                << "Qt";
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < theme_list.size(); i++)
     {
         this->ui->theme_cb->addItem(theme_list[i]);
     }
