@@ -58,6 +58,8 @@ public:
     bool setFlowControl(FLOW_CONTROL _flow_control);
     QByteArray readData();
     int writeData(const QString &_data);
+    int writeData(const QByteArray &data);
+    int writeData(const unsigned char data);
     bool openPort();
     bool isPortOpening();
     void closePort();

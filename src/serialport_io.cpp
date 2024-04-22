@@ -176,3 +176,13 @@ int SerialPortIO::writeData(const QString &data)
 {
     return this->m_serial_port->write(data.toStdString().c_str());
 }
+
+int SerialPortIO::writeData(const QByteArray &data)
+{
+    return this->m_serial_port->write(data);
+}
+
+int SerialPortIO::writeData(const unsigned char data)
+{
+    return this->m_serial_port->write((char *)&data, 1);
+}
