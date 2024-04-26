@@ -362,5 +362,6 @@ void SettingWindow::OnIsOpen()
     g_bSerialPortOpen = this->serial_port_io->isPortOpening();
     // qDebug() << "isOpen: " << g_bSerialPortOpen;
 
-    this->updateAvailableSerialPorts();
+    if (!g_bSerialPortOpen)
+        this->updateAvailableSerialPorts();
 }
