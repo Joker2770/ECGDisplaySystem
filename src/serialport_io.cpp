@@ -182,7 +182,7 @@ int SerialPortIO::writeData(const QByteArray &data)
     return this->m_serial_port->write(data);
 }
 
-int SerialPortIO::writeData(const unsigned char data)
+int SerialPortIO::writeData(const char* data)
 {
-    return this->m_serial_port->write((char *)&data, 1);
+    return this->m_serial_port->write(data, 1);
 }

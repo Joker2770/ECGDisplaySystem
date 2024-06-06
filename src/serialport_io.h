@@ -59,7 +59,7 @@ public:
     QByteArray readData();
     int writeData(const QString &_data);
     int writeData(const QByteArray &data);
-    int writeData(const unsigned char data);
+    int writeData(const char* data);
     bool openPort();
     bool isPortOpening();
     void closePort();
